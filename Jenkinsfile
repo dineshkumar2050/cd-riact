@@ -9,20 +9,20 @@ pipeline {
                 echo "Checked out successfully"
             }
         }
-        stage('Install Dependencies') {
-            steps {
-                echo "Installing Dependencies..."
-                sh '''
-                    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-                    export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
-                    nvm install 20  // Or your desired version
-                    nvm use 20      
-                    npm install
-                '''
-                 echo "Installed Dependencies successfully"
-             }
-         }
+        // stage('Install Dependencies') {
+        //     steps {
+        //         echo "Installing Dependencies..."
+        //         sh '''
+        //             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+        //             export NVM_DIR="$HOME/.nvm"
+        //             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
+        //             nvm install 20  // Or your desired version
+        //             nvm use 20      
+        //             npm install
+        //         '''
+        //          echo "Installed Dependencies successfully"
+        //      }
+        //  }
         stage('git') {
             steps {
                 echo "adding git step..."
