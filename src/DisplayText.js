@@ -16,7 +16,7 @@ export default function TextDisplay() {
   return (
     <div>
         <h2>Display text component</h2>
-        <pre>{textData}</pre> // Use pre to preserve formatting, adjust as needed
+        <pre>{textData}</pre>
     </div>
   );
 }
