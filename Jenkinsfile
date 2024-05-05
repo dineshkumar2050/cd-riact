@@ -6,26 +6,28 @@ pipeline {
                 echo "Checking out..."
                 // Checkout the code from the Git repository
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '8f791876-c68a-41ad-b163-9ed1dbe0ff6a', url: 'https://github.com/dineshkumar2050/cd-riact.git']])
-                echo "Checked out successflly"
+                echo "Checked out successfully"
             }
         }
         stage('Install Dependencies') {
             steps {
                 echo "Installing Dependencies..."
-                // Install Node.js and npm
-                sh 'curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -'
-                sh 'sudo apt-get install -y nodejs'
-                
-                // Install project dependencies
-                sh 'npm install'
-                echo "Installed Dependencies successflly"
-            }
-        }
+                sh '''
+                    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
+                    nvm install 20  // Or your desired version
+                    nvm use 20      
+                    npm install
+                '''
+                 echo "Installed Dependencies successfully"
+             }
+         }
         stage('git') {
             steps {
                 echo "adding git step..."
                 git branch: 'main', credentialsId: '8f791876-c68a-41ad-b163-9ed1dbe0ff6a', url: 'https://github.com/dineshkumar2050/cd-riact.git'
-                echo "added git step successflly"
+                echo "added git step successfully"
             }
         }
     }
